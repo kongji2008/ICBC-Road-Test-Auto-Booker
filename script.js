@@ -1,11 +1,12 @@
 let CONFIG = {
-    PREFER_TO_BE_AFTER: new Date("2020-01-01"),
-    PREFER_TO_BE_BEFORE: new Date("2024-01-01"),
-    LAST_NAME: 'X',
-    LICENSE_NUMBER: 'X',
-    KEYWORD: 'X',
-    CITY: 'Richmond, BC', /* has to match the city name in the dropdown. Case sensitive. */
-    LOCATION: 'Richmond driver licensing' /* has to match the location name in the list. Case sensitive. */
+    PREFER_TO_BE_AFTER: new Date(),
+    PREFER_TO_BE_BEFORE: new Date("2024-09-27"),
+    LAST_NAME: '',
+    LICENSE_NUMBER: '',
+    KEYWORD: '',
+    CITY: 'Coquitlam, BC', /* has to match the city name in the dropdown. Case sensitive. */
+    LOCATION: 'Port Coquitlam driver licensing', /* has to match the location name in the list. Case sensitive. */
+    REFRESH_TIMEOUT: 30000
 }
 
 let aborted = false;
@@ -118,13 +119,10 @@ const ICBCSite = {
 
             const errorMessage = '.error-message';
             const buttonExistsInNextPage = '.raised-button';
-            let dom;
-            do {
-                dom = await $(`${errorMessage}, ${buttonExistsInNextPage}`);
-                await new Promise(resolve => setTimeout(resolve, 500));
-                const signInButton = await $('button', 'Sign in');
-                signInButton.click();
-            } while (dom.classList.contains(errorMessage))
+            
+
+            const signInButton = await $('button', 'Sign in');
+            signInButton.click();    
         } catch (e) {
             if (!aborted) {
                 console.log(`Cannot login. Retrying now... ${e}`);
@@ -260,6 +258,7 @@ const ICBCSite = {
             }
         }
 
+        await new Promise(r => setTimeout(r, REFRESH_TIMEOUT)); // how long it takes for refreshing the booking page
         await ICBCSite.checkDate(appointmentListings); // recursion
     },
 
