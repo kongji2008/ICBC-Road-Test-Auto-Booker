@@ -19,7 +19,4 @@ Notice the page logs in itself? That's it! Now just leave the tab open. Turn up 
 
 As soon as it catches a desired date, you will hear a tsunami alert, CONGRATS, you found a closer date! Now go check your email inbox and finish the verification on the page!
 
-![](/pictures/found.png)
-![](/pictures/record.png)
-
 Good luck on your road test! Either be kick ass or kick the examiner's ass!
